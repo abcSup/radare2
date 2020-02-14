@@ -1221,8 +1221,7 @@ R_API int r_main_radare2(int argc, char **argv) {
 			if (compute_hashes && iod) {
 				// TODO: recall with limit=0 ?
 				ut64 limit = r_config_get_i (r->config, "bin.hashlimit");
-				(void)r_bin_file_hash (r->bin, limit, iod->name, NULL);
-				//eprintf ("WARNING: File hash not calculated\n");
+				r_bin_file_set_hashes (r->bin, r_bin_file_compute_hashes (r->bin, limit));
 			}
 			npath = r_config_get (r->config, "file.path");
 			if (!quiet && path && *path && npath && strcmp (path, npath)) {
